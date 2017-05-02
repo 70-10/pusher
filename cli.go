@@ -14,12 +14,12 @@ func Run(args []string) int {
 	var cfg config.Config
 	err := cfg.Initialize()
 	if err != nil {
-		return command.ExitCodeCreateConfigError
+		return command.ExitCodeInitializeConfigError
 	}
 
 	err = config.InitializePayload()
 	if err != nil {
-		return 100
+		return command.ExitCodeInitializePayloadError
 	}
 
 	meta := &command.Meta{

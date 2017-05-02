@@ -2,10 +2,11 @@ package command
 
 const (
 	ExitCodeOK = iota
-	ExitCodeCreateConfigError
+	ExitCodeInitializeConfigError
 	ExitCodeRunCommandError
 	ExitCodeCertificateError
 	ExitCodeClientEnvironmentError
 	ExitCodePushNotificationError
+	ExitCodeInitializePayloadError
 	ExitCodePayloadFileError
 )
