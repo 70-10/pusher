@@ -2,6 +2,7 @@ package command
 
 import (
 	"fmt"
+	"io/ioutil"
 
 	"github.com/sideshow/apns2"
 	"github.com/sideshow/apns2/certificate"
@@ -21,7 +22,11 @@ func (c *PushCommand) Run(args []string) int {
 	notification := &apns2.Notification{}
 	notification.DeviceToken = c.Config.DeviceToken
 	notification.Topic = c.Config.Topic
-	notification.Payload = []byte(`{"aps": {"alert": "Push Test"}}`)
+	payload, err := ioutil.ReadFile(c.Config.PayloadFilePath)
+	if err != nil {
+		return ExitCodePayloadFileError
+	}
+	notification.Payload = payload
 
 	client := apns2.NewClient(cert)
 	env := c.Config.Env

@@ -46,7 +46,7 @@ func (cfg *Config) Initialize() error {
 	}
 	cfg.Env = "production"
 	cfg.P12FilePath = "/path/to/file.p12"
-	cfg.PayloadFilePath = "/path/to/payload.json"
+	cfg.PayloadFilePath = filepath.Join(dir, "payload.json")
 
 	return toml.NewEncoder(f).Encode(cfg)
 }

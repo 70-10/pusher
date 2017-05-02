@@ -17,6 +17,11 @@ func Run(args []string) int {
 		return command.ExitCodeCreateConfigError
 	}
 
+	err = config.InitializePayload()
+	if err != nil {
+		return 100
+	}
+
 	meta := &command.Meta{
 		Ui: &cli.ColoredUi{
 			InfoColor:  cli.UiColorBlue,

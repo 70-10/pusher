@@ -7,4 +7,5 @@ const (
 	ExitCodeCertificateError
 	ExitCodeClientEnvironmentError
 	ExitCodePushNotificationError
+	ExitCodePayloadFileError
 )

@@ -17,6 +17,11 @@ func Commands(meta *command.Meta) map[string]cli.CommandFactory {
 				Meta: *meta,
 			}, nil
 		},
+		"payload": func() (cli.Command, error) {
+			return &command.PayloadCommand{
+				Meta: *meta,
+			}, nil
+		},
 		"version": func() (cli.Command, error) {
 			return &command.VersionCommand{
 				Meta:     *meta,
