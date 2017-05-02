@@ -10,6 +10,11 @@ type PayloadCommand struct {
 }
 
 func (c *PayloadCommand) Run(args []string) int {
+	err := c.Config.InitializePayload()
+	if err != nil {
+		return ExitCodeInitializePayloadError
+	}
+
 	command := "vim" + " " + c.Config.PayloadFilePath
 
 	var cmd *exec.Cmd
@@ -17,7 +22,7 @@ func (c *PayloadCommand) Run(args []string) int {
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
 	cmd.Stdin = os.Stdin
-	err := cmd.Run()
+	err = cmd.Run()
 	if err != nil {
 		return ExitCodeRunCommandError
 	}

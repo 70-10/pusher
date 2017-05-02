@@ -17,11 +17,6 @@ func Run(args []string) int {
 		return command.ExitCodeInitializeConfigError
 	}
 
-	err = config.InitializePayload()
-	if err != nil {
-		return command.ExitCodeInitializePayloadError
-	}
-
 	meta := &command.Meta{
 		Ui: &cli.ColoredUi{
 			InfoColor:  cli.UiColorBlue,

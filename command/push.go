@@ -13,6 +13,11 @@ type PushCommand struct {
 }
 
 func (c *PushCommand) Run(args []string) int {
+	err := c.Config.InitializePayload()
+	if err != nil {
+		return ExitCodeInitializePayloadError
+	}
+
 	cert, err := certificate.FromP12File(c.Config.P12FilePath, c.Config.P12Password)
 	if err != nil {
 		c.Ui.Error(fmt.Sprintf("Certificate Error: %v", err))

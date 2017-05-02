@@ -10,18 +10,18 @@ import (
 	"github.com/sideshow/apns2/payload"
 )
 
-func InitializePayload() error {
-	dir := filepath.Join(os.Getenv("HOME"), ".config", "pusher")
+func (c *Config) InitializePayload() error {
+	dir := filepath.Dir(c.PayloadFilePath)
 
 	if err := os.MkdirAll(dir, 0700); err != nil {
 		return fmt.Errorf("cannot create directoty: %v", err)
 	}
-	file := filepath.Join(dir, "payload.json")
+
 	payload := payload.NewPayload()
 
-	_, err := os.Stat(file)
+	_, err := os.Stat(c.PayloadFilePath)
 	if err == nil {
-		bs, err := ioutil.ReadFile(file)
+		bs, err := ioutil.ReadFile(c.PayloadFilePath)
 		if err != nil {
 			return err
 		}
@@ -37,7 +37,7 @@ func InitializePayload() error {
 		return err
 	}
 
-	f, err := os.Create(file)
+	f, err := os.Create(c.PayloadFilePath)
 	if err != nil {
 		return err
 	}
