@@ -19,3 +19,9 @@ $ pusher config
 ```
 $ pusher push
 ```
+
+### Edit Payload JSON
+
+```
+$ pusher payload
+```
