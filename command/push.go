@@ -3,6 +3,7 @@ package command
 import (
 	"fmt"
 	"io/ioutil"
+	"strings"
 
 	"github.com/sideshow/apns2"
 	"github.com/sideshow/apns2/certificate"
@@ -34,10 +35,10 @@ func (c *PushCommand) Run(args []string) int {
 	notification.Payload = payload
 
 	client := apns2.NewClient(cert)
-	env := c.Config.Env
+	env := strings.ToLower(c.Config.Env)
 	if env == "production" || env == "prod" || env == "pro" {
 		client = client.Production()
-	} else if env == "development" || env == "develop" || env == "dev" {
+	} else if env == "development" || env == "develop" || env == "dev" || env == "sandbox" {
 		client = client.Development()
 	} else {
 		c.Ui.Error("Environment is unexpected")
